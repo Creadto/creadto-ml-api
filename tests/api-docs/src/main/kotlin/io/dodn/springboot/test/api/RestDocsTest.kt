@@ -27,29 +27,26 @@ abstract class RestDocsTest {
         this.restDocumentation = restDocumentation
     }
 
-    protected fun given(): MockMvcRequestSpecification {
-        return mockMvc
-    }
+    protected fun given(): MockMvcRequestSpecification = mockMvc
 
     protected fun mockController(controller: Any): MockMvcRequestSpecification {
         val mockMvc = createMockMvc(controller)
-        return RestAssuredMockMvc.given()
-            .mockMvc(mockMvc)
+        return RestAssuredMockMvc.given().mockMvc(mockMvc)
     }
 
     private fun createMockMvc(controller: Any): MockMvc {
         val converter = MappingJackson2HttpMessageConverter(objectMapper())
 
-        return MockMvcBuilders.standaloneSetup(controller)
+        return MockMvcBuilders
+            .standaloneSetup(controller)
             .apply<StandaloneMockMvcBuilder>(MockMvcRestDocumentation.documentationConfiguration(restDocumentation))
             .setMessageConverters(converter)
             .build()
     }
 
-    private fun objectMapper(): ObjectMapper {
-        return jacksonObjectMapper()
+    private fun objectMapper(): ObjectMapper =
+        jacksonObjectMapper()
             .findAndRegisterModules()
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
-    }
 }

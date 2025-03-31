@@ -1,5 +1,8 @@
 package io.dodn.springboot.core.support.error
 
+import kotlin.ConsistentCopyVisibility
+
+@ConsistentCopyVisibility
 data class ErrorMessage private constructor(
     val code: String,
     val message: String,

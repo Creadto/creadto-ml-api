@@ -5,7 +5,5 @@ import io.dodn.springboot.core.domain.ExampleData
 data class ExampleRequestDto(
     val data: String,
 ) {
-    fun toExampleData(): ExampleData {
-        return ExampleData(data, data)
-    }
+    fun toExampleData(): ExampleData = ExampleData(data, data)
 }
